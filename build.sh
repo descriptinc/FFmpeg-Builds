@@ -10,15 +10,6 @@ for addin in ${ADDINS[*]}; do
     source "addins/${addin}.sh"
 done
 
-if docker info -f "{{println .SecurityOptions}}" | grep rootless >/dev/null 2>&1; then
-    UIDARGS=()
-else
-    UIDARGS=( -u "$(id -u):$(id -g)" )
-fi
-
-rm -rf .tmp
-mkdir -p .tmp
-
 FFMPEG_REPO="${FFMPEG_REPO:-https://github.com/descriptinc/ffmpeg.git}"
 FFMPEG_REPO="${FFMPEG_REPO_OVERRIDE:-$FFMPEG_REPO}"
 GIT_BRANCH="${GIT_BRANCH:-master}"
